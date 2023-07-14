@@ -50,9 +50,7 @@ class UsersController {
     try {
       const { email, password, nickname } = req.body;
 
-      const findUser = await this.userService.findOneUser({ where: { email } });
-
-      console.log(findUser);
+      const findUser = await this.userService.findOneUser(email);
 
       if (findUser.password !== password || findUser.nickname !== nickname) {
         throw new Error("닉네임 또는 패스워드를 확인해주세요.")
