@@ -15,9 +15,6 @@ class UsersController {
       if (existUser) {
         throw new Error("이미 존재하는 이메일입니다.");
       }
-      if (email.length <= 0 || name.length <= 0 || nickname.length <= 0) {
-        throw new Error("InvalidParamsError");
-      }
 
       if (checkPassword !== password) {
         throw new Error("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
