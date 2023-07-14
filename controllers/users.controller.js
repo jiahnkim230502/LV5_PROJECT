@@ -63,10 +63,16 @@ class UsersController {
       return res.status(200).json({ message: "로그인에 성공하였습니다." });
 
     } catch (error) {
-      res.status(400).json({ eorrorMessage: error.message })
-    }
-  }
+      res.status(400).json({ eorrorMessage: error.message });
+    };
+  };
 
-}
+  getUser = async (req, res, next) => {
+    const { userId } = req.params
+    const userInfo = await this.userService.findUserInfo(userId);
+
+    res.status(200).json({ data : userInfo});
+  }
+};
 
 module.exports = UsersController;

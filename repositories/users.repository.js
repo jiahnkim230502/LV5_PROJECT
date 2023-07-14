@@ -9,12 +9,6 @@ class UserRepository {
     return user;
   };
 
-  findUserById = async (userId) => {
-    const user = await this.usersModel.findByPk(userId);
-
-    return user;
-  };
-
   createUser = async (email, password, name, age, gender, nickname) => {
     const createUserData = await this.usersModel.create({
       email,
@@ -27,6 +21,12 @@ class UserRepository {
 
     return createUserData;
   };
-}
+
+  findUserInfo = async (userId) => {
+    const userData = await this.usersModel.findByPk(userId);
+
+    return userData;
+  };
+};
 
 module.exports = UserRepository;
