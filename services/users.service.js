@@ -6,23 +6,26 @@ const { Users } = require("../models/index.js");
 class UserService {
   userRepository = new UserRepository(Users);
 
+  findOneUser = async (email) => {
+    const user = await this.userRepository.findOneUser(email);
+
+    return user;
+  }
+
   findUserById = async (userId) => {
-    const findUser = await this.userRepository.findUserById(userId);
+    const user = await this.userRepository.findUserById(userId);
 
     return {
-      email: findUser.email,
-      password: findUser.password,
-      name: findUser.name,
-      age: findUser.age,
-      gender: findUser.gender,
-      nickname: findUser.nickname,
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      age: user.age,
+      gender: user.gender,
+      nickname: user.nickname,
     };
   };
 
   createUser = async (email, password, name, age, gender, nickname) => {
-    const existUser = await this.userRepository.findOneUser({email});
-
-    if (existUser) throw new Error("이미 존재하는 이메일입니다.");
 
     const createUserData = await this.userRepository.createUser(
       email,
@@ -40,13 +43,6 @@ class UserService {
       gender: createUserData.gender,
       nickname: createUserData.nickname,
     };
-  };
-
-  loginUser = async (email, nickname, password) => {
-    const user = await this.userRepository.findOneUser(email);
-
-    if (user.nickname !== nickname || user.password !== password)
-      throw new Error("닉네임 또는 패스워드를 확인해주세요.");
   };
 };
 

@@ -4,10 +4,10 @@ class UserRepository {
   }
 
   findOneUser = async (email) => {
-    const user = await this.usersModel.findOne({email});
+    const user = await this.usersModel.findOne({ where: { email: email } });
 
     return user;
-  }
+  };
 
   findUserById = async (userId) => {
     const user = await this.usersModel.findByPk(userId);
