@@ -35,7 +35,7 @@ class PostRepository {
   };
 
   deletePost = async (postId, password) => {
-    const updatePostData = await this.postsModel.destroy({ where: { postId, password}});
+    const updatePostData = await this.postsModel.destroy({ where: { postId, password } });
 
     return updatePostData;
   };
