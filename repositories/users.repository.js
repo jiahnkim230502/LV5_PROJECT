@@ -2,8 +2,15 @@ class UserRepository {
   constructor(usersModel) {
     this.usersModel = usersModel;
   }
-  findOneUser = async () => {
-    const user = await this.usersModel.findOne();
+
+  findOneUser = async (email) => {
+    const user = await this.usersModel.findOne({email});
+
+    return user;
+  }
+
+  findUserById = async (userId) => {
+    const user = await this.usersModel.findByPk(userId);
 
     return user;
   };
@@ -17,11 +24,9 @@ class UserRepository {
       gender,
       nickname,
     });
-    
+
     return createUserData;
   };
-
-  loginUser = async (email, password, nickname) => {
-    const loginUserData = await this.
-  }
 }
+
+module.exports = UserRepository;

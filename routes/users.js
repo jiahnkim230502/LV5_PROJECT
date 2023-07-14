@@ -6,8 +6,7 @@ require("dotenv").config();
 
 // 회원가입 API
 router.post("/signup", async (req, res) => {
-  const { email, password, checkPassword, name, age, gender, nickname } =
-    req.body;
+  const { email, password, checkPassword, name, age, gender, nickname } = req.body;
   const isExistUser = await Users.findOne({
     where: {
       email: email,
@@ -22,14 +21,9 @@ router.post("/signup", async (req, res) => {
     return res.status(409).json({ message: "이미 존재하는 이메일입니다." });
   }
   // 1. 닉네임은 최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)로 구성하기
-  if (
-    nickname.length < 3 ||
-    !/[A-Z]/.test(nickname) ||
-    !/[0-9]/.test(nickname)
-  ) {
+  if (nickname.length < 3 || !/[A-Z]/.test(nickname) || !/[0-9]/.test(nickname)) {
     return res.status(409).json({
-      message:
-        "닉네임은 최소 3자 이상, 알파벳 대문자와 숫자를 포함하여야 합니다.",
+      message: "닉네임은 최소 3자 이상, 알파벳 대문자와 숫자를 포함하여야 합니다.",
     });
   }
   // 2. 비밀번호는 최소 4자 이상이며, 닉네임과 같은 값이 포함된 경우 회원가입에 실패로 만들기
@@ -75,13 +69,11 @@ router.post("/login", async (req, res) => {
   });
   // 5. 로그인 버튼을 누른 경우 닉네임과 비밀번호가 데이터베이스에 등록됐는지 확인한 뒤, 하나라도 맞지 않는 정보가 있다면 "닉네임 또는 패스워드를 확인해주세요."라는 에러 메세지를 response에 포함하기
   if (userInfo.password !== password || userInfo.nickname !== nickname) {
-    return res
-      .status(409)
-      .json({ message: "닉네임 또는 패스워드를 확인해주세요." });
+    return res.status(409).json({ message: "닉네임 또는 패스워드를 확인해주세요." });
   }
 
   // jwt를 생성하고
-  const token = jwt.sign({userId: user.userId}, process.env.COOKIE_SECRET);
+  const token = jwt.sign({ userId: user.userId }, process.env.COOKIE_SECRET);
 
   // 쿠키를 발급
   // 6. 로그인 성공 시, 로그인에 성공한 유저의 정보를 JWT를 활용하여 클라이언트에게 Cookie로 전달하기
@@ -105,5 +97,3 @@ router.get("/users/:userId", async (req, res) => {
 
   return res.status(200).json({ data: user });
 });
-
-
