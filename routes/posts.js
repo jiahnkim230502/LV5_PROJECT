@@ -134,7 +134,3 @@ router.delete("/posts/:postId", authMiddleware, async (req, res) => {
 
   return res.status(200).json({ message: "게시글이 삭제되었습니다." });
 });
-
-module.exports = router;
-
-module.exports = router;

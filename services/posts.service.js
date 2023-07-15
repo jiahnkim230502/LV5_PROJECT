@@ -1,4 +1,5 @@
 const PostRepository = require("../repositories/posts.repository.js");
+
 const { Posts } = require("../models/index.js");
 
 class PostService {
@@ -35,8 +36,9 @@ class PostService {
     };
   };
 
-  createPost = async (nickname, password, title, content) => {
+  createPost = async (userId, nickname, password, title, content) => {
     const createPostData = await this.postRepository.createPost(
+      userId,
       nickname,
       password,
       title,
@@ -44,6 +46,7 @@ class PostService {
     );
 
     return {
+      UserId: createPostData.UserId,
       postId: createPostData.postId,
       nickname: createPostData.nickname,
       title: createPostData.title,
@@ -53,11 +56,9 @@ class PostService {
     };
   };
 
-  updatePost = async (postId, password, title, content) => {
-    const findPost = await this.postRepository.findPostById(postId);
-    if (!findPost) throw new Error("Post doesn't exist");
+  updatePost = async (postId, nickname, title, content) => {
 
-    await this.postRepository.updatePost(postId, password, title, content);
+    await this.postRepository.updatePost(postId, nickname, title, content);
 
     const updatePost = await this.postRepository.findPostById(postId);
 

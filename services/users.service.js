@@ -1,6 +1,5 @@
 const UserRepository = require("../repositories/users.repository.js");
 
-const jwt = require("jsonwebtoken");
 const { Users } = require("../models/index.js");
 
 class UserService {

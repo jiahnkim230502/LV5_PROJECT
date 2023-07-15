@@ -14,8 +14,9 @@ class PostRepository {
     return post;
   };
 
-  createPost = async (nickname, password, title, content) => {
+  createPost = async (userId, nickname, password, title, content) => {
     const createPostData = await this.postsModel.create({
+      UserId: userId,
       nickname,
       password,
       title,
@@ -25,10 +26,10 @@ class PostRepository {
     return createPostData;
   };
 
-  updatePost = async (postId, password, title, content) => {
+  updatePost = async (postId, nickname, title, content) => {
     const updatePostData = await this.postsModel.update(
       { title, content },
-      { where: { postId, password } }
+      { where: { postId, nickname } }
     );
 
     return updatePostData;
