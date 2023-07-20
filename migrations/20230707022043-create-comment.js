@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      UserId: {
+      userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
@@ -18,7 +18,7 @@ module.exports = {
         },
         ondelete: "CASCADE",
       },
-      PostId: {
+      postId: {
         allowNull: false, // NOT NULL
         type: Sequelize.INTEGER,
         references: {

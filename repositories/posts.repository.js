@@ -1,7 +1,8 @@
 class PostRepository {
   constructor(postsModel) {
     this.postsModel = postsModel;
-  }
+  };
+
   findAllPost = async () => {
     const posts = await this.postsModel.findAll();
 
@@ -16,7 +17,7 @@ class PostRepository {
 
   createPost = async (userId, nickname, password, title, content) => {
     const createPostData = await this.postsModel.create({
-      UserId: userId,
+      userId: userId,
       nickname,
       password,
       title,

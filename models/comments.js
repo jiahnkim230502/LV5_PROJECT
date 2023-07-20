@@ -11,14 +11,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Users, {
         targetkey: 'userId',
-        foreignKey: 'UserId',
+        foreignKey: 'userId',
       })
 
 
       this.belongsTo(models.Posts, {
         // 2. Posts 모델에게 1:1 관계 설정을 합니다.
         targetKey: "postId", // 3. Posts 모델의 userId 컬럼을
-        foreignKey: "PostId", // 4. UserInfos 모델의 UserId 컬럼과 연결합니다.
+        foreignKey: "postId", // 4. UserInfos 모델의 UserId 컬럼과 연결합니다.
       });
     }
   }
@@ -30,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true, // Primary Key (기본키)
         type: DataTypes.INTEGER,
       },
-      UserId: {
+      userId: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      PostId: {
+      postId: {
         allowNull: false, // NOT NULL
         type: DataTypes.INTEGER,
       },
