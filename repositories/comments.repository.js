@@ -3,6 +3,12 @@ class CommentRepository {
     this.commentsModel = commentsModel;
   };
 
+  findCommentId = async (commentId) => {
+    const findCommentId = await this.commentsModel.findOne({ where: { commentId } });
+
+    return findCommentId;
+  };
+
   findAllComments = async (postId) => {
     const comments = await this.commentsModel.findAll({ where: { postId } });
 
@@ -17,6 +23,21 @@ class CommentRepository {
     });
 
     return createCommentData;
+  };
+
+  updateComment = async (postId, commentId, userId, content) => {
+    const updateCommentData = await this.commentsModel.update(
+      { postId, content },
+      { where: { userId, commentId } }
+    );
+
+    return updateCommentData;
+  };
+
+  deleteComment = async (commentId, userId) => {
+    const deleteCommentData = await this.commentsModel.destroy({ where: { commentId, userId } });
+
+    return deleteCommentData;
   };
 };
 

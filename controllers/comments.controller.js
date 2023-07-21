@@ -13,8 +13,8 @@ class CommentController {
 
     } catch (error) {
       res.status(400).json({ errorMessage: error.message });
-    }
-  }
+    };
+  };
 
   createComment = async (req, res) => {
     try {
@@ -33,6 +33,39 @@ class CommentController {
     } catch (error) {
       res.status(400).json({ errorMessage: error.message });
     };
+  };
+
+  updateComment = async (req, res) => {
+    try {
+      const { userId } = res.locals.user;
+      const { postId, commentId } = req.params;
+      const { content } = req.body;
+
+      const updateComment = await this.commentService.updateComment(
+        postId,
+        commentId,
+        userId,
+        content,
+      );
+
+      res.status(200).json({ data: updateComment });
+
+    } catch (error) {
+      res.status(400).json({ errorMessage: error.message });
+    };
+  };
+
+  deleteComment = async (req, res) => {
+    try {
+      const { userId } = res.locals.user;
+      const { commentId } = req.params;
+
+      const deleteComment = await this.commentService.deleteComment(commentId, userId);
+
+      res.status(200).json({ data: deleteComment });
+    } catch (error) {
+      res.status(400).json({ errorMessage: error.message });
+    }
   };
 };
 
