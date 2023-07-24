@@ -10,10 +10,6 @@ class CommentService {
   findAllComments = async (postId) => {
     const comments = await this.commentRepository.findAllComments(postId);
 
-    comments.sort((a, b) => {
-      return b.createdAt - a.createdAt;
-    });
-
     return comments.map((comment) => {
       return {
         commentId: comment.commentId,
@@ -74,8 +70,6 @@ class CommentService {
 
   deleteComment = async (commentId, userId) => {
     const comment = await this.commentRepository.findCommentId(commentId);
-
-    console.log(userId);
 
     if (comment.userId !== userId)
       throw new Error("댓글 삭제 권한이 없습니다.");

@@ -12,6 +12,10 @@ class CommentRepository {
   findAllComments = async (postId) => {
     const comments = await this.commentsModel.findAll({ where: { postId } });
 
+    comments.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
+
     return comments;
   };
 
