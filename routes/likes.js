@@ -27,8 +27,8 @@ router.put("/posts/:postId/like", authMiddleware, async (req, res) => {
   // Likes 테이블 안에 전달받은 PostId와 UserId가 일치하는 자료가 존재하는지 확인.
   const existLike = await Likes.findOne({
     where: {
-        PostId: postId,
-        UserId: userId
+      PostId: postId,
+      UserId: userId
     },
   });
 
@@ -53,9 +53,7 @@ router.put("/posts/:postId/like", authMiddleware, async (req, res) => {
       // 현재 userId와 현재 postId를 Likes 테이블에서 삭제한다.
       where: { PostId: postId, UserId: userId },
     });
-    return res
-      .status(200)
-      .json({ message: "게시글의 좋아요를 취소하였습니다." });
+    return res.status(200).json({ message: "게시글의 좋아요를 취소하였습니다." });
   }
 });
 
