@@ -1,7 +1,7 @@
 # LV5_PROJECT
 내일배움캠프 주특기 node.js LV5 개인과제
 
-Layered Architecture Pattern 적용 후 느낀점
+Layered Architecture Pattern에 대해
 
 LV4 과제에 Layered Architecture Pattern을 적용하는 과정은 힘들었지만 그만큼 레이어드 아키텍쳐 패턴의 장점을 알아가는 시간을 가졌다고 생각합니다.
 레이어드 아키텍쳐 패턴의 장점인 유지보수라는 측면에 대해서는 처음에는 이해하지 못하였지만 기존의 API를 하나씩 모듈화 하는 과정 속에서 계층별로 나눠진 코드를 
